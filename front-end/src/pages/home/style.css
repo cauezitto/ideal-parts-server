@@ -1,0 +1,10 @@
+.carouselContainer {
+    margin: auto;
+    
+}
+
+@media(min-width: 1150px){
+    .carouselContainer{
+        width: 85vw;
+    }
+}

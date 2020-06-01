@@ -1,0 +1,49 @@
+.container{
+  display: flex;
+  flex-direction: column;
+
+  background-color: blue;
+
+  width: 100vw;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+}
+
+.mapContainer{
+  width: 90vw;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  margin: auto;
+
+  margin-top: 30px;
+}
+
+.map{
+  height: 400px;
+
+  width: 100%;
+
+  align-self: center;
+
+  margin: auto;
+
+  margin-top: 20px;
+
+  border-radius: 20px;
+ }
+
+ h1{
+   font-family: Arial, Helvetica, sans-serif;
+   font-weight: bold;
+   color: #6d7680;
+ }
