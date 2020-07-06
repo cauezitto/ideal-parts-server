@@ -4,14 +4,22 @@ const Tweet = use('App/Models/Tweet')
 
 class TweetController {
  
-  async index ({ request, response, view }) {
-    const tweets = Tweet.all()
+  async index () {
+    const tweets = await Tweet.query()
+      .with('user')
+      .fetch()
+
+      const jsonTweets = tweets.toJSON()
+    
+      jsonTweets.map(tweet=> delete tweet.user.password)
+
+      return jsonTweets
   }
 
   async store ({ request, auth, response}) {
     const data = request.only(['content'])
 
-    console.log(auth.user)
+    console.log('auth',auth.user)
     const tweet = await Tweet.create({user_id: auth.user.id, ...data})
 
     return tweet
@@ -19,8 +27,11 @@ class TweetController {
 
  
   async show ({ params, request, response, view }) {
-    const tweet = Tweet.findOrFail(param.id)
+    const tweet = await Tweet
+      .findOrFail(params.id)
 
+    
+  
     return tweet
   }
 
@@ -32,14 +43,13 @@ class TweetController {
 
   async destroy ({ params, auth, request, response }) {
 
-    const tweet = Tweet.findOrFail(param.id)
+    const tweet = await Tweet.findOrFail(params.id)
 
     if(tweet.user_id !== auth.user.id){
       return response.status(401)
     }
 
     await tweet.delete()
-
   }
 }
 
